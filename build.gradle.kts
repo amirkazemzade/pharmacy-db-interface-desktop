@@ -27,6 +27,7 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(compose.desktop.currentOs)
+                implementation("mysql:mysql-connector-java:8.0.31")
             }
         }
         val jvmTest by getting
