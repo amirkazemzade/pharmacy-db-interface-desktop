@@ -31,7 +31,11 @@ kotlin {
                 implementation("mysql:mysql-connector-java:8.0.31")
             }
         }
-        val jvmTest by getting
+        val jvmTest by getting {
+            dependencies {
+                implementation(kotlin("test"))
+            }
+        }
     }
 }
 
