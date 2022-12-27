@@ -30,6 +30,7 @@ kotlin {
                 api(compose.animation)
                 implementation("mysql:mysql-connector-java:8.0.31")
             }
+
         }
         val jvmTest by getting {
             dependencies {

@@ -12,11 +12,14 @@ import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import data.model.Med
+import ui.navigator.LocalNavigator
 import ui.widgets.util.TableCell
 
 
 @Composable
-fun MedRow(med: Med) {
+fun MedRow(med: Med, onDelete: (med: Med) -> Unit) {
+    val navigator = LocalNavigator.current
+
     Row(
         horizontalArrangement = Arrangement.SpaceEvenly,
         modifier = Modifier
@@ -29,24 +32,23 @@ fun MedRow(med: Med) {
         TableCell(weight = 1F) { Text("${med.inv}") }
         TableCell(weight = 1F) { Text("${med.price}") }
         TableCell(weight = 2F) { Text("${med.expirationDate}") }
-        TableCell(weight = 3F) { Text(med.medName) }
+        TableCell(weight = 3F) { Text(med.medName ?: "") }
         TableCell(weight = 2F) {
             Row(
-                horizontalArrangement = Arrangement.SpaceEvenly
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                modifier = Modifier.fillMaxWidth()
             ) {
                 IconButton(
                     onClick = {
-                        // TODO navigate to edit page
+                        navigator.invoke { EditMedScreen(med) }
                     }
                 ) {
-                    Icon(Icons.Filled.Edit, contentDescription = "Edit Item" , tint = MaterialTheme.colors.secondary)
+                    Icon(Icons.Filled.Edit, contentDescription = "Edit Item", tint = MaterialTheme.colors.secondary)
                 }
                 IconButton(
-                    onClick = {
-                        // TODO delete item
-                    }
+                    onClick = { onDelete(med) }
                 ) {
-                    Icon(Icons.Filled.Delete, contentDescription = "Delete Item" , tint = MaterialTheme.colors.secondary)
+                    Icon(Icons.Filled.Delete, contentDescription = "Delete Item", tint = MaterialTheme.colors.secondary)
                 }
             }
         }

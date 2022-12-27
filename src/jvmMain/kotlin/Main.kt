@@ -10,7 +10,6 @@ import androidx.compose.ui.window.application
 import ui.theme.Theme
 import ui.widgets.dashboard.DashboardScreen
 import ui.widgets.util.LocalIsDarkMode
-import java.awt.Color
 
 
 @Composable
@@ -33,7 +32,6 @@ fun main() = application {
         title = "Pharmacy Storage",
         icon = painterResource("Icons/capsules_64px.png"),
     ) {
-        this.window.graphics.color = Color.BLACK
         App()
     }
 }

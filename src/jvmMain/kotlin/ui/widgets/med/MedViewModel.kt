@@ -5,6 +5,7 @@ import data.model.Med
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.runBlocking
+import util.defaultErrorMessage
 
 class MedViewModel {
     private val _medsListState = MutableStateFlow<MedsListState>(MedsListState.Initial)
@@ -16,10 +17,10 @@ class MedViewModel {
             val meds = MysqlConnector.getMeds()
             _medsListState.value = MedsListState.Success(meds)
         } catch (e: Exception) {
+            _medsListState.value = MedsListState.Error(e.message ?: defaultErrorMessage)
             e.printStackTrace()
         }
     }
-
 }
 
 

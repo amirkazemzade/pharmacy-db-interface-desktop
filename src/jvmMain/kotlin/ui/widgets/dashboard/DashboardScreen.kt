@@ -11,7 +11,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import ui.navigator.NavHost
+import ui.widgets.category.CategoryScreen
 import ui.widgets.med.MedScreen
+import ui.widgets.pharm.PharmScreen
 import ui.widgets.util.LocalIsDarkMode
 
 @Preview
@@ -24,29 +27,21 @@ fun DashboardScreen() {
     ) {
         NavigationRail(
             header = {
-                IconButton(
-                    onClick = {
-                        isDark.value = !isDark.value
-                    }
-                ) {
-                    println(LocalIsDarkMode.current)
-                    if (LocalIsDarkMode.current.value)
-                        Icon(
-                            painterResource("Icons/light_mode.svg"),
-                            contentDescription = "Switch to dark mode",
-                            modifier = Modifier.width(24.dp).height(24.dp)
-                        )
-                    else
-                        Icon(
-                            painterResource("Icons/dark_mode.svg"),
-                            contentDescription = "Switch to light mode",
-                            modifier = Modifier.width(24.dp).height(24.dp)
-                        )
+                IconButton(onClick = {
+                    isDark.value = !isDark.value
+                }) {
+                    if (isDark.value) Icon(
+                        painterResource("Icons/light_mode.svg"),
+                        contentDescription = "Switch to dark mode",
+                        modifier = Modifier.width(24.dp).height(24.dp)
+                    )
+                    else Icon(
+                        painterResource("Icons/dark_mode.svg"),
+                        contentDescription = "Switch to light mode",
+                        modifier = Modifier.width(24.dp).height(24.dp)
+                    )
                 }
-            },
-            modifier = Modifier
-                .fillMaxHeight()
-                .verticalScroll(rememberScrollState())
+            }, modifier = Modifier.fillMaxHeight().verticalScroll(rememberScrollState())
         ) {
             Table.values().forEachIndexed { index, table ->
                 Column(modifier = Modifier) {
@@ -72,12 +67,44 @@ fun DashboardScreen() {
 }
 
 enum class Table(val tableName: String, val iconPath: String, val screen: @Composable () -> Unit) {
-    PHARM("Pharm", "Icons/admin_meds.svg", {}),
-    MED("Med", "Icons/medication.svg", { MedScreen() }),
-    CATEGORY("Category", "Icons/category.svg", {}),
-    COMPANY("Company", "Icons/lab_panel.svg", {}),
-    PATIENT("Patient", "Icons/personal_injury.svg", {}),
-    PRESCRIPTION("Prescription", "Icons/prescriptions.svg", {}),
-    DOCTOR("Doctor", "Icons/stethoscope.svg", {}),
-    INSURANCE("Insurance", "Icons/health_and_safety.svg", {}),
+    PHARM(
+        "Pharm",
+        "Icons/admin_meds.svg",
+        { NavHost { PharmScreen() } },
+    ),
+    MED(
+        "Med",
+        "Icons/medication.svg",
+        { NavHost { MedScreen() } },
+    ),
+    CATEGORY(
+        "Category",
+        "Icons/category.svg",
+        { NavHost { CategoryScreen() } },
+    ),
+    COMPANY(
+        "Company",
+        "Icons/lab_panel.svg",
+        {},
+    ),
+    PATIENT(
+        "Patient",
+        "Icons/personal_injury.svg",
+        {},
+    ),
+    PRESCRIPTION(
+        "Prescription",
+        "Icons/prescriptions.svg",
+        {},
+    ),
+    DOCTOR(
+        "Doctor",
+        "Icons/stethoscope.svg",
+        {},
+    ),
+    INSURANCE(
+        "Insurance",
+        "Icons/health_and_safety.svg",
+        {},
+    ),
 }

@@ -4,13 +4,13 @@ import java.sql.Date
 import java.sql.ResultSet
 
 data class Med(
-    val id: Int,
+    val id: Int = 0,
     val pharmId: Int,
     val compId: Int,
     val inv: Int,
     val price: Long,
     val expirationDate: Date,
-    val medName: String,
+    val medName: String?,
 ) {
     constructor(result: ResultSet) : this(
         result.getInt("id"),
