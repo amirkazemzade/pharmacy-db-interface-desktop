@@ -17,6 +17,7 @@ import ui.widgets.company.view.CompanyScreen
 import ui.widgets.med.view.MedScreen
 import ui.widgets.patient.view.PatientScreen
 import ui.widgets.pharm.view.PharmScreen
+import ui.widgets.prescription.view.PrescriptionScreen
 import ui.widgets.util.LocalIsDarkMode
 
 @Preview
@@ -97,7 +98,7 @@ enum class Table(val tableName: String, val iconPath: String, val screen: @Compo
     PRESCRIPTION(
         "Prescription",
         "Icons/prescriptions.svg",
-        {},
+        { NavHost { PrescriptionScreen() } },
     ),
     DOCTOR(
         "Doctor",

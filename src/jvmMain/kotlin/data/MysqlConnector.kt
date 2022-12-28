@@ -155,4 +155,33 @@ object MysqlConnector {
         val statement = connection.createStatement()
         statement.execute(query)
     }
+
+    fun getPrescriptions(): List<Prescription> {
+        val query = "select * from prescription"
+        val statement = connection.createStatement()
+        val result = statement.executeQuery(query)
+        val prescriptions = mutableListOf<Prescription>()
+        while (result.next()) {
+            prescriptions.add(Prescription(result))
+        }
+        return prescriptions
+    }
+
+    fun insertPrescription(prescription: Prescription) {
+        val query = "insert into prescription values (${prescription.values()})"
+        val statement = connection.createStatement()
+        statement.execute(query)
+    }
+
+    fun deletePrescription(prescriptionId: Int) {
+        val query = "delete from prescription where id=${prescriptionId}"
+        val statement = connection.createStatement()
+        statement.execute(query)
+    }
+
+    fun updatePrescription(prescription: Prescription) {
+        val query = "update prescription set ${prescription.parametricValues()} where id=${prescription.id}"
+        val statement = connection.createStatement()
+        statement.execute(query)
+    }
 }
