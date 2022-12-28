@@ -1,9 +1,6 @@
 package data
 
-import data.model.Category
-import data.model.Company
-import data.model.Med
-import data.model.Pharm
+import data.model.*
 import java.sql.DriverManager
 
 object MysqlConnector {
@@ -76,11 +73,11 @@ object MysqlConnector {
         val query = "select * from category"
         val statement = connection.createStatement()
         val result = statement.executeQuery(query)
-        val categorys = mutableListOf<Category>()
+        val categories = mutableListOf<Category>()
         while (result.next()) {
-            categorys.add(Category(result))
+            categories.add(Category(result))
         }
-        return categorys
+        return categories
     }
 
     fun insertCategory(category: Category) {
@@ -126,6 +123,35 @@ object MysqlConnector {
 
     fun updateCompany(company: Company) {
         val query = "update company set ${company.parametricValues()} where id=${company.id}"
+        val statement = connection.createStatement()
+        statement.execute(query)
+    }
+
+    fun getPatients(): List<Patient> {
+        val query = "select * from patient"
+        val statement = connection.createStatement()
+        val result = statement.executeQuery(query)
+        val patients = mutableListOf<Patient>()
+        while (result.next()) {
+            patients.add(Patient(result))
+        }
+        return patients
+    }
+
+    fun insertPatient(patient: Patient) {
+        val query = "insert into patient values (${patient.values()})"
+        val statement = connection.createStatement()
+        statement.execute(query)
+    }
+
+    fun deletePatient(patientId: Int) {
+        val query = "delete from patient where id=${patientId}"
+        val statement = connection.createStatement()
+        statement.execute(query)
+    }
+
+    fun updatePatient(patient: Patient) {
+        val query = "update patient set ${patient.parametricValues()} where id=${patient.id}"
         val statement = connection.createStatement()
         statement.execute(query)
     }
