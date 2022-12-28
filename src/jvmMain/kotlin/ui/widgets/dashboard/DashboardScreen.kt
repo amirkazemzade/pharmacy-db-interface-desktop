@@ -15,6 +15,7 @@ import ui.navigator.NavHost
 import ui.widgets.category.view.CategoryScreen
 import ui.widgets.company.view.CompanyScreen
 import ui.widgets.doctor.view.DoctorScreen
+import ui.widgets.insurance.view.InsuranceScreen
 import ui.widgets.med.view.MedScreen
 import ui.widgets.patient.view.PatientScreen
 import ui.widgets.pharm.view.PharmScreen
@@ -109,6 +110,6 @@ enum class Table(val tableName: String, val iconPath: String, val screen: @Compo
     INSURANCE(
         "Insurance",
         "Icons/health_and_safety.svg",
-        {},
+        { NavHost { InsuranceScreen() } },
     ),
 }

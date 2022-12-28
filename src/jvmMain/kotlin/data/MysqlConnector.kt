@@ -213,4 +213,33 @@ object MysqlConnector {
         val statement = connection.createStatement()
         statement.execute(query)
     }
+
+    fun getInsurances(): List<Insurance> {
+        val query = "select * from insurance"
+        val statement = connection.createStatement()
+        val result = statement.executeQuery(query)
+        val insurances = mutableListOf<Insurance>()
+        while (result.next()) {
+            insurances.add(Insurance(result))
+        }
+        return insurances
+    }
+
+    fun insertInsurance(insurance: Insurance) {
+        val query = "insert into insurance values (${insurance.values()})"
+        val statement = connection.createStatement()
+        statement.execute(query)
+    }
+
+    fun deleteInsurance(insuranceId: Int) {
+        val query = "delete from insurance where id=${insuranceId}"
+        val statement = connection.createStatement()
+        statement.execute(query)
+    }
+
+    fun updateInsurance(insurance: Insurance) {
+        val query = "update insurance set ${insurance.parametricValues()} where id=${insurance.id}"
+        val statement = connection.createStatement()
+        statement.execute(query)
+    }
 }
