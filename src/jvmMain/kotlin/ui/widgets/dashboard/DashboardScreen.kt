@@ -13,6 +13,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import ui.navigator.NavHost
 import ui.widgets.category.view.CategoryScreen
+import ui.widgets.company.view.CompanyScreen
 import ui.widgets.med.view.MedScreen
 import ui.widgets.pharm.view.PharmScreen
 import ui.widgets.util.LocalIsDarkMode
@@ -85,7 +86,7 @@ enum class Table(val tableName: String, val iconPath: String, val screen: @Compo
     COMPANY(
         "Company",
         "Icons/lab_panel.svg",
-        {},
+        { NavHost { CompanyScreen() } },
     ),
     PATIENT(
         "Patient",

@@ -1,6 +1,7 @@
 package data
 
 import data.model.Category
+import data.model.Company
 import data.model.Med
 import data.model.Pharm
 import java.sql.DriverManager
@@ -100,4 +101,32 @@ object MysqlConnector {
         statement.execute(query)
     }
 
+    fun getCompanies(): List<Company> {
+        val query = "select * from company"
+        val statement = connection.createStatement()
+        val result = statement.executeQuery(query)
+        val companies = mutableListOf<Company>()
+        while (result.next()) {
+            companies.add(Company(result))
+        }
+        return companies
+    }
+
+    fun insertCompany(company: Company) {
+        val query = "insert into company values (${company.values()})"
+        val statement = connection.createStatement()
+        statement.execute(query)
+    }
+
+    fun deleteCompany(companyId: Int) {
+        val query = "delete from company where id=${companyId}"
+        val statement = connection.createStatement()
+        statement.execute(query)
+    }
+
+    fun updateCompany(company: Company) {
+        val query = "update company set ${company.parametricValues()} where id=${company.id}"
+        val statement = connection.createStatement()
+        statement.execute(query)
+    }
 }
