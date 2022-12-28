@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import ui.navigator.NavHost
+import ui.widgets.category.view.CategoryScreen
 import ui.widgets.med.view.MedScreen
 import ui.widgets.pharm.view.PharmScreen
 import ui.widgets.util.LocalIsDarkMode
@@ -79,7 +80,7 @@ enum class Table(val tableName: String, val iconPath: String, val screen: @Compo
     CATEGORY(
         "Category",
         "Icons/category.svg",
-        { },
+        { NavHost { CategoryScreen() } },
     ),
     COMPANY(
         "Company",

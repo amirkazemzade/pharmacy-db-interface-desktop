@@ -12,8 +12,10 @@ const val expirationDateText = "Expiration Date"
 const val medNameText = "Med Name"
 
 
-const val nameText  = "Name"
+const val nameText = "Name"
 const val needPrcText = "Need Prescription"
 const val usageText = "Usage"
 const val sideEffectsText = "Side Effects"
 const val categoryIdText = "Category ID"
+
+const val descriptionText = "Description"

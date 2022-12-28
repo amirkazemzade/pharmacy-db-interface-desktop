@@ -1,4 +1,4 @@
-package ui.widgets.pharm.view
+package ui.widgets.category.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -11,14 +11,17 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import data.model.Pharm
+import data.model.Category
 import ui.navigator.LocalNavigator
 import ui.widgets.util.TableCell
-import util.*
+import util.actionsText
+import util.descriptionText
+import util.idText
+import util.nameText
 
 
 @Composable
-fun PharmRow(pharm: Pharm, onDelete: (pharm: Pharm) -> Unit) {
+fun CategoryRow(category: Category, onDelete: (category: Category) -> Unit) {
     val navigator = LocalNavigator.current
 
     Row(
@@ -27,12 +30,9 @@ fun PharmRow(pharm: Pharm, onDelete: (pharm: Pharm) -> Unit) {
             .fillMaxWidth()
             .height(intrinsicSize = IntrinsicSize.Max),
     ) {
-        TableCell(weight = 1F) { Text("${pharm.id}") }
-        TableCell(weight = 2F) { Text(pharm.name) }
-        TableCell(weight = 1F) { Text("${pharm.needPrescription}") }
-        TableCell(weight = 3F) { Text(pharm.usage ?: "") }
-        TableCell(weight = 3F) { Text(pharm.sideEffects ?: "") }
-        TableCell(weight = 1F) { Text("${pharm.categoryId}") }
+        TableCell(weight = 1F) { Text("${category.id}") }
+        TableCell(weight = 2F) { Text(category.name) }
+        TableCell(weight = 3F) { Text(category.description ?: "") }
         TableCell(weight = 2F) {
             Row(
                 horizontalArrangement = Arrangement.SpaceEvenly,
@@ -40,13 +40,13 @@ fun PharmRow(pharm: Pharm, onDelete: (pharm: Pharm) -> Unit) {
             ) {
                 IconButton(
                     onClick = {
-                        navigator.invoke { EditPharmScreen(pharm) }
+                        navigator.invoke { EditCategoryScreen(category) }
                     }
                 ) {
                     Icon(Icons.Filled.Edit, contentDescription = "Edit Item", tint = MaterialTheme.colors.secondary)
                 }
                 IconButton(
-                    onClick = { onDelete(pharm) }
+                    onClick = { onDelete(category) }
                 ) {
                     Icon(Icons.Filled.Delete, contentDescription = "Delete Item", tint = MaterialTheme.colors.secondary)
                 }
@@ -56,7 +56,7 @@ fun PharmRow(pharm: Pharm, onDelete: (pharm: Pharm) -> Unit) {
 }
 
 @Composable
-fun PharmTitleRow() {
+fun CategoryTitleRow() {
     Row(
         horizontalArrangement = Arrangement.SpaceEvenly,
         modifier = Modifier
@@ -66,10 +66,7 @@ fun PharmTitleRow() {
     ) {
         TableCell(weight = 1F) { Text(idText) }
         TableCell(weight = 2F) { Text(nameText) }
-        TableCell(weight = 1F) { Text(needPrcText) }
-        TableCell(weight = 3F) { Text(usageText) }
-        TableCell(weight = 3F) { Text(sideEffectsText) }
-        TableCell(weight = 1F) { Text(categoryIdText) }
+        TableCell(weight = 3F) { Text(descriptionText) }
         TableCell(weight = 2F) { Text(actionsText) }
     }
 }

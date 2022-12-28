@@ -1,5 +1,6 @@
 package data
 
+import data.model.Category
 import data.model.Med
 import data.model.Pharm
 import java.sql.DriverManager
@@ -42,31 +43,61 @@ object MysqlConnector {
     }
 
     fun getPharms(): List<Pharm> {
-            val query = "select * from pharm"
-            val statement = connection.createStatement()
-            val result = statement.executeQuery(query)
-            val pharms = mutableListOf<Pharm>()
-            while (result.next()) {
-                pharms.add(Pharm(result))
-            }
-            return pharms
+        val query = "select * from pharm"
+        val statement = connection.createStatement()
+        val result = statement.executeQuery(query)
+        val pharms = mutableListOf<Pharm>()
+        while (result.next()) {
+            pharms.add(Pharm(result))
         }
+        return pharms
+    }
 
-        fun insertPharm(pharm: Pharm) {
-            val query = "insert into pharm values (${pharm.values()})"
-            val statement = connection.createStatement()
-            statement.execute(query)
-        }
+    fun insertPharm(pharm: Pharm) {
+        val query = "insert into pharm values (${pharm.values()})"
+        val statement = connection.createStatement()
+        statement.execute(query)
+    }
 
-        fun deletePharm(pharmId: Int) {
-            val query = "delete from pharm where id=$pharmId"
-            val statement = connection.createStatement()
-            statement.execute(query)
-        }
+    fun deletePharm(pharmId: Int) {
+        val query = "delete from pharm where id=$pharmId"
+        val statement = connection.createStatement()
+        statement.execute(query)
+    }
 
-        fun updatePharm(pharm: Pharm) {
-            val query = "update pharm set ${pharm.parametricValues()} where id=${pharm.id}"
-            val statement = connection.createStatement()
-            statement.execute(query)
+    fun updatePharm(pharm: Pharm) {
+        val query = "update pharm set ${pharm.parametricValues()} where id=${pharm.id}"
+        val statement = connection.createStatement()
+        statement.execute(query)
+    }
+
+    fun getCategories(): List<Category> {
+        val query = "select * from category"
+        val statement = connection.createStatement()
+        val result = statement.executeQuery(query)
+        val categorys = mutableListOf<Category>()
+        while (result.next()) {
+            categorys.add(Category(result))
         }
+        return categorys
+    }
+
+    fun insertCategory(category: Category) {
+        val query = "insert into category values (${category.values()})"
+        val statement = connection.createStatement()
+        statement.execute(query)
+    }
+
+    fun deleteCategory(categoryId: Int) {
+        val query = "delete from category where id=$categoryId"
+        val statement = connection.createStatement()
+        statement.execute(query)
+    }
+
+    fun updateCategory(category: Category) {
+        val query = "update category set ${category.parametricValues()} where id=${category.id}"
+        val statement = connection.createStatement()
+        statement.execute(query)
+    }
+
 }

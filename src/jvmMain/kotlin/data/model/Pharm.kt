@@ -28,11 +28,11 @@ data class Pharm(
         result.getInt(categoryIdKey),
     )
 
-    fun values() = "$id, '$name', $needPrescription, '$usage', '$sideEffects', $categoryId"
+    fun values() = "$id, '$name', $needPrescription, '${usage ?: ""}', '${sideEffects ?: ""}', $categoryId"
 
     fun parametricValues() =
-        "$nameKey='$name', $needPrcKey=$needPrescription, `$usageKey`='$usage', $sideEffectsKey='$sideEffects', " +
-                "$categoryIdKey=$categoryId"
+        "$nameKey='$name', $needPrcKey=$needPrescription, `$usageKey`='${usage ?: ""}', " +
+                "$sideEffectsKey='${sideEffects ?: ""}', $categoryIdKey=$categoryId"
 }
 
 
