@@ -1,4 +1,4 @@
-package ui.widgets.med
+package ui.widgets.med.view
 
 import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.layout.*
@@ -20,6 +20,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ui.navigator.LocalNavigator
+import ui.widgets.med.viewModel.DeleteMedState
+import ui.widgets.med.viewModel.DeleteMedViewModel
+import ui.widgets.med.viewModel.MedViewModel
+import ui.widgets.med.viewModel.MedsListState
 import ui.widgets.util.Center
 import ui.widgets.util.showSuccess
 import util.Action

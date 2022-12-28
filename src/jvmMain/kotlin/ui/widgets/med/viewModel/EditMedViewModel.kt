@@ -1,4 +1,4 @@
-package ui.widgets.med
+package ui.widgets.med.viewModel
 
 import data.MysqlConnector
 import data.model.Med
@@ -12,8 +12,8 @@ class UpdateOrAddMedViewModel {
     val editMedState: StateFlow<EditMedState> = _editMedState
 
     fun addMed(med: Med) = runBlocking {
+        _editMedState.value = EditMedState.Loading
         try {
-            _editMedState.value = EditMedState.Loading
             MysqlConnector.insertMed(med)
             _editMedState.value = EditMedState.Success
         } catch (e: Exception) {

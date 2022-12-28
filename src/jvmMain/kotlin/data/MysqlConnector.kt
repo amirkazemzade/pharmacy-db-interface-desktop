@@ -1,6 +1,7 @@
 package data
 
 import data.model.Med
+import data.model.Pharm
 import java.sql.DriverManager
 
 object MysqlConnector {
@@ -39,4 +40,33 @@ object MysqlConnector {
         val statement = connection.createStatement()
         statement.execute(query)
     }
+
+    fun getPharms(): List<Pharm> {
+            val query = "select * from pharm"
+            val statement = connection.createStatement()
+            val result = statement.executeQuery(query)
+            val pharms = mutableListOf<Pharm>()
+            while (result.next()) {
+                pharms.add(Pharm(result))
+            }
+            return pharms
+        }
+
+        fun insertPharm(pharm: Pharm) {
+            val query = "insert into pharm values (${pharm.values()})"
+            val statement = connection.createStatement()
+            statement.execute(query)
+        }
+
+        fun deletePharm(pharmId: Int) {
+            val query = "delete from pharm where id=$pharmId"
+            val statement = connection.createStatement()
+            statement.execute(query)
+        }
+
+        fun updatePharm(pharm: Pharm) {
+            val query = "update pharm set ${pharm.parametricValues()} where id=${pharm.id}"
+            val statement = connection.createStatement()
+            statement.execute(query)
+        }
 }

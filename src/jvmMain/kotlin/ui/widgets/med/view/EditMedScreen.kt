@@ -1,4 +1,4 @@
-package ui.widgets.med
+package ui.widgets.med.view
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Column
@@ -22,6 +22,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ui.navigator.LocalNavigator
+import ui.widgets.med.viewModel.EditMedState
+import ui.widgets.med.viewModel.UpdateOrAddMedViewModel
 import ui.widgets.util.Center
 import ui.widgets.util.showInvalidValueSnackBar
 import ui.widgets.util.showSuccess

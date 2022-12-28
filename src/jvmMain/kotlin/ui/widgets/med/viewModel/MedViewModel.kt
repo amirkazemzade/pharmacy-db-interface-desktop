@@ -1,4 +1,4 @@
-package ui.widgets.med
+package ui.widgets.med.viewModel
 
 import data.MysqlConnector
 import data.model.Med
